@@ -1,0 +1,21 @@
+branch-defaults:
+  master:
+    environment: node-express-env
+environment-defaults:
+  node-express-env:
+    branch: master
+    repository: origin
+global:
+  application_name: rahulmishra
+  branch: master
+  default_ec2_keyname: EC2 key pair for 3rd website
+  default_platform: Node.js 12 running on 64bit Amazon Linux 2
+  default_region: ap-south-1
+  include_git_submodules: true
+  instance_profile: null
+  platform_name: null
+  platform_version: null
+  profile: null
+  repository: origin
+  sc: git
+  workspace_type: Application
