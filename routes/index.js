@@ -2,12 +2,15 @@ const express = require("express");
 
 const speakersRoute = require("./speakers");
 
+const membersRoute = require("./members");
+
 const feedbackRoute = require("./feedback");
 
 const router = express.Router();
 
 module.exports = (params) => {
   const { speakersService } = params;
+  const { membersService } = params;
 
   router.get("/", async (request, response, next) => {
     /*if (!request.session.visitcount) {
@@ -33,6 +36,7 @@ module.exports = (params) => {
   });
 
   router.use("/speakers", speakersRoute(params));
+  router.use("/members", membersRoute(params));
   router.use("/feedback", feedbackRoute(params));
   return router;
 };

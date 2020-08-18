@@ -10,10 +10,12 @@ const createError = require("http-errors");
 const bodyParser = require("body-parser");
 
 const FeedbackService = require("./services/FeedbackService");
-const SpeekersService = require("./services/SpeakerService");
+const SpeakersService = require("./services/SpeakerService");
+const MembersService = require("./services/MemberService");
 
 const feedbackService = new FeedbackService("./data/feedback.json");
-const speakersService = new SpeekersService("./data/speakers.json");
+const speakersService = new SpeakersService("./data/speakers.json");
+const membersService = new MembersService("./data/members.json");
 
 const routes = require("./routes");
 
@@ -59,12 +61,22 @@ app.use(async (request, response, next) => {
     return next(err);
   }
 });
+app.use(async (request, response, next) => {
+  try {
+    const names = await membersService.getNames();
+    response.locals.memberNames = names;
+    return next();
+  } catch (err) {
+    return next(err);
+  }
+});
 
 app.use(
   "/",
   routes({
     feedbackService,
     speakersService,
+    membersService,
   })
 );
 

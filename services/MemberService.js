@@ -9,7 +9,7 @@ const readFile = util.promisify(fs.readFile);
 /**
  * Logic for fetching speakers information
  */
-class SpeakerService {
+class MemberService {
   /**
    * Constructor
    * @param {*} datafile Path to a JSOn file that contains the speakers data
@@ -25,9 +25,9 @@ class SpeakerService {
     const data = await this.getData();
 
     // We are using map() to transform the array we get into another one
-    return data.map((speaker) => {
+    return data.map((member) => {
       //throw new Error('Async await error');
-      return { name: speaker.name, shortname: speaker.shortname };
+      return { name: member.name, shortname: member.shortname };
     });
   }
 
@@ -53,30 +53,30 @@ class SpeakerService {
    * Get all artwork of a given speaker
    * @param {*} shortname The speakers short name
    */
-  async getArtworkForSpeaker(shortname) {
+  async getArtworkForMember(shortname) {
     const data = await this.getData();
-    const speaker = data.find((elm) => {
+    const member = data.find((elm) => {
       return elm.shortname === shortname;
     });
-    if (!speaker || !speaker.artwork) return null;
-    return speaker.artwork;
+    if (!member || !member.artwork) return null;
+    return member.artwork;
   }
 
   /**
    * Get speaker information provided a shortname
    * @param {*} shortname
    */
-  async getSpeaker(shortname) {
+  async getMember(shortname) {
     const data = await this.getData();
-    const speaker = data.find((elm) => {
+    const member = data.find((elm) => {
       return elm.shortname === shortname;
     });
-    if (!speaker) return null;
+    if (!member) return null;
     return {
-      title: speaker.title,
-      name: speaker.name,
-      shortname: speaker.shortname,
-      description: speaker.description,
+      title: member.title,
+      name: member.name,
+      shortname: member.shortname,
+      description: member.description,
     };
   }
 
@@ -85,11 +85,11 @@ class SpeakerService {
    */
   async getListShort() {
     const data = await this.getData();
-    return data.map((speaker) => {
+    return data.map((member) => {
       return {
-        name: speaker.name,
-        shortname: speaker.shortname,
-        title: speaker.title,
+        name: member.name,
+        shortname: member.shortname,
+        title: member.title,
       };
     });
   }
@@ -99,12 +99,12 @@ class SpeakerService {
    */
   async getList() {
     const data = await this.getData();
-    return data.map((speaker) => {
+    return data.map((member) => {
       return {
-        name: speaker.name,
-        shortname: speaker.shortname,
-        title: speaker.title,
-        summary: speaker.summary,
+        name: member.name,
+        shortname: member.shortname,
+        title: member.title,
+        summary: member.summary,
       };
     });
   }
@@ -114,8 +114,8 @@ class SpeakerService {
    */
   async getData() {
     const data = await readFile(this.datafile, "utf8");
-    return JSON.parse(data).speakers;
+    return JSON.parse(data).members;
   }
 }
 
-module.exports = SpeakerService;
+module.exports = MemberService;
