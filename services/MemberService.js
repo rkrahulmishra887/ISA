@@ -26,7 +26,6 @@ class MemberService {
 
     // We are using map() to transform the array we get into another one
     return data.map((member) => {
-      //throw new Error('Async await error');
       return { name: member.name, shortname: member.shortname };
     });
   }

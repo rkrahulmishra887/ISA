@@ -8,6 +8,7 @@ module.exports = (params) => {
   router.get("/", async (request, response, next) => {
     try {
       const members = await membersService.getList();
+
       const artwork = await membersService.getAllArtwork();
 
       return response.render("layout", {
