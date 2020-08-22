@@ -77,6 +77,7 @@ class SpeakerService {
       name: speaker.name,
       shortname: speaker.shortname,
       description: speaker.description,
+      link: speaker.link,
     };
   }
 
@@ -105,6 +106,7 @@ class SpeakerService {
         shortname: speaker.shortname,
         title: speaker.title,
         summary: speaker.summary,
+        link: speaker.link,
       };
     });
   }
